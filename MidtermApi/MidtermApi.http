@@ -1,0 +1,6 @@
+@MidtermApi_HostAddress = http://localhost:5220
+
+GET {{MidtermApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
