@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MidtermApi.Data;
 using MidtermApi.Models;
 
@@ -17,6 +18,7 @@ namespace MidtermApi.Controllers
         }
 
         [HttpPost("add-tuition")]
+        [Authorize]
         public ActionResult<AddTuitionResponse> AddTuition(string studentNo, string term, int amount)
         {
             var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo && s.Term == term);
@@ -34,6 +36,7 @@ namespace MidtermApi.Controllers
         }
 
         [HttpGet("unpaid-tuition-status")]
+        [Authorize]
         public ActionResult<UnpaidTuitionStatusResponse> UnpaidTuitionStatus(int page = 1, int pageSize = 10)
         {
             var unpaidStudents = _context.Students.Where(s => s.Status =="unpaid").ToList();

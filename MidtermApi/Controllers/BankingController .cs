@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MidtermApi.Data;
 using MidtermApi.Models;
 using System;
@@ -19,6 +20,7 @@ namespace MidtermApi.Controllers
         }
 
         [HttpGet("BankQueryTuition/{studentNo}")]
+        [Authorize]
         public ActionResult<TuitionQueryResponse> QueryTuition(string studentNo)
         {
             var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo);
