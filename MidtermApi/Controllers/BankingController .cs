@@ -18,7 +18,7 @@ namespace MidtermApi.Controllers
             _context = context;
         }
 
-        [HttpGet("query-tuition")]
+        [HttpGet("BankQueryTuition/{studentNo}")]
         public ActionResult<TuitionQueryResponse> QueryTuition(string studentNo)
         {
             var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo);
@@ -30,23 +30,59 @@ namespace MidtermApi.Controllers
             return Ok(new TuitionQueryResponse { TuitionTotal = student.TuitionTotal, Balance = student.Balance });
         }
 
-        [HttpPost("pay-tuition")]
-        public ActionResult<PayTuitionResponse> PayTuition(PayTuitionRequest request)
+        [HttpPost("add-balance")]
+        public ActionResult<AddTuitionResponse> AddTuition(string studentNo,int amount)
         {
-            var student = _context.Students.FirstOrDefault(s => s.StudentNo == request.StudentNo && s.Term == request.Term);
+            var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo);
             if (student == null)
             {
                 return NotFound("Student not found");
             }
 
-            // Add logic to process payment
-            // For example, update student's balance and payment status
-            student.Balance -= student.TuitionTotal;
-            student.Status = "Paid";
+
+            student.Balance += amount;
 
             _context.SaveChanges();
 
-            return Ok(new PayTuitionResponse { PaymentStatus = "Successful" });
+            return Ok(new AddTuitionResponse { TransactionStatus = "Success" });
+        }
+
+        [HttpPost("pay-tuition")]
+        public ActionResult<PayTuitionResponse> PayTuition(string studentNo, string term)
+        {
+            var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo && s.Term == term);
+            if (student == null)
+            {
+                return NotFound("Student not found");
+            }
+
+            if(student.Balance  > 0 && student.TuitionTotal > 0)
+            { 
+                if(student.Balance > student.TuitionTotal)
+                {
+                    student.Balance -= student.TuitionTotal;
+                    student.TuitionTotal = 0;
+                }
+                else { 
+                    student.TuitionTotal -= student.Balance;
+                    student.Balance = 0;
+                }
+                _context.SaveChanges();
+
+                return Ok(new PayTuitionResponse { PaymentStatus = "Successful" });
+            }
+            else
+            {
+                if(student.TuitionTotal == 0)
+                {
+                    return BadRequest("Tuition is already paid");
+                }
+                else
+                {
+                    return BadRequest("Insufficient balance to pay tuition");
+                }
+            }
+           
         }
     }
 }

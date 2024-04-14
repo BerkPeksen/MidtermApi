@@ -18,7 +18,7 @@ namespace MidtermApi.Controllers
             _context = context;
         }
 
-        [HttpGet("{studentNo}")]
+        [HttpGet("MobileQueryTuition/{studentNo}")]
         public ActionResult<TuitionQueryResponse> QueryTuition(string studentNo)
         {
             var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo);

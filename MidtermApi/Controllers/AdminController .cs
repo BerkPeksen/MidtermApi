@@ -17,17 +17,16 @@ namespace MidtermApi.Controllers
         }
 
         [HttpPost("add-tuition")]
-        public ActionResult<AddTuitionResponse> AddTuition(AddTuitionRequest request)
+        public ActionResult<AddTuitionResponse> AddTuition(string studentNo, string term, int amount)
         {
-            var student = _context.Students.FirstOrDefault(s => s.StudentNo == request.StudentNo && s.Term == request.Term);
+            var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo && s.Term == term);
             if (student == null)
             {
                 return NotFound("Student not found");
             }
 
-            // Add logic to update student's tuition amount
-            // For example, increment the tuition total by a fixed amount
-            student.TuitionTotal += 1000;
+            
+            student.TuitionTotal += amount;
 
             _context.SaveChanges();
 
@@ -47,7 +46,8 @@ namespace MidtermApi.Controllers
             var unpaidStudentDtos = pagedStudents.Select(s => new UnpaidTuitionStatus
             {
                 StudentNo = s.StudentNo,
-                UnpaidAmount = s.Balance
+                Term = s.Term,
+                UnpaidAmount = s.TuitionTotal
             }).ToList();
 
             return Ok(new UnpaidTuitionStatusResponse { Students = unpaidStudentDtos });
