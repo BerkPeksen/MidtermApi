@@ -35,11 +35,11 @@ namespace MidtermApi.Controllers
             return Ok(new TuitionResponse { Status = "Success" });
         }
 
-        [HttpGet("UnpaidIuitionStatus")]
+        [HttpGet("UnpaidTuitionStatus/{term}")]
         [Authorize]
-        public ActionResult<UnpaidTuitionStatusResponse> UnpaidTuitionStatus(int page = 1, int pageSize = 10)
+        public ActionResult<UnpaidTuitionStatusResponse> UnpaidTuitionStatus(string term,int page = 1, int pageSize = 10)
         {
-            var unpaidStudents = _context.Students.Where(s => s.Status =="unpaid").ToList();
+            var unpaidStudents = _context.Students.Where(s => s.Status =="unpaid" && s.Term == term).ToList();
 
             var totalCount = unpaidStudents.Count();
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
