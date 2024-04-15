@@ -1,6 +1,6 @@
 ﻿namespace MidtermApi.Models
 {
-    public class PayTuitionRequest
+    public class TuitionRequest
     {
         public string StudentNo { get; set; }
         public string Term { get; set; }

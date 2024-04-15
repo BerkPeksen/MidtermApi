@@ -32,8 +32,8 @@ namespace MidtermApi.Controllers
             return Ok(new TuitionQueryResponse { TuitionTotal = student.TuitionTotal, Balance = student.Balance });
         }
 
-        [HttpPost("add-balance")]
-        public ActionResult<AddTuitionResponse> AddTuition(string studentNo,int amount)
+        [HttpPost("AddBalance")]
+        public ActionResult<TuitionResponse> AddTuition(string studentNo,int amount)
         {
             var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo);
             if (student == null)
@@ -46,11 +46,11 @@ namespace MidtermApi.Controllers
 
             _context.SaveChanges();
 
-            return Ok(new AddTuitionResponse { TransactionStatus = "Success" });
+            return Ok(new TuitionResponse { Status = "Success" });
         }
 
-        [HttpPost("pay-tuition")]
-        public ActionResult<PayTuitionResponse> PayTuition(string studentNo, string term)
+        [HttpPost("PayTuition")]
+        public ActionResult<TuitionResponse> PayTuition(string studentNo, string term)
         {
             var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo && s.Term == term);
             if (student == null)
@@ -71,7 +71,7 @@ namespace MidtermApi.Controllers
                 }
                 _context.SaveChanges();
 
-                return Ok(new PayTuitionResponse { PaymentStatus = "Successful" });
+                return Ok(new TuitionResponse { Status = "Successful" });
             }
             else
             {

@@ -17,9 +17,9 @@ namespace MidtermApi.Controllers
             _context = context;
         }
 
-        [HttpPost("add-tuition")]
+        [HttpPost("AddTuition")]
         [Authorize]
-        public ActionResult<AddTuitionResponse> AddTuition(string studentNo, string term, int amount)
+        public ActionResult<TuitionResponse> AddTuition(string studentNo, string term, int amount)
         {
             var student = _context.Students.FirstOrDefault(s => s.StudentNo == studentNo && s.Term == term);
             if (student == null)
@@ -32,10 +32,10 @@ namespace MidtermApi.Controllers
 
             _context.SaveChanges();
 
-            return Ok(new AddTuitionResponse { TransactionStatus = "Success" });
+            return Ok(new TuitionResponse { Status = "Success" });
         }
 
-        [HttpGet("unpaid-tuition-status")]
+        [HttpGet("UnpaidIuitionStatus")]
         [Authorize]
         public ActionResult<UnpaidTuitionStatusResponse> UnpaidTuitionStatus(int page = 1, int pageSize = 10)
         {
