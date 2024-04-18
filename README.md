@@ -3,7 +3,7 @@ This project is an ASP.NET Core API for managing university tuition fees. It all
 
 # Design
 ## Assumptions
-Each student has a unique student number (StudentNo).
+Each student has a unique student number and ID (StudentNo, ID).
 
 The 'Term' field represents the academic term for which the tuition fee is applicable.
 
@@ -26,7 +26,7 @@ The data model for the project is as follows:
 
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/GnZ9z8h/Screenshot-2024-04-18-204038.png" alt="Screenshot-2024-04-18-204038" border="0" /></a>
 
-StudentID (int, primary key)
+ID (int, primary key)
 
 StudentNo (string)
 
