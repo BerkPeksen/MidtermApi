@@ -41,6 +41,15 @@ Status (string)
 You can use two different tables for Student and The bank information (In this case just the 'Balance') but I decided to use a single table for simplicity in this project 
 
 ## Video
+Youtube:
+
+
+<a href="https://youtu.be/PXFdO77KNPA"><img src="https://img.youtube.com/vi/PXFdO77KNPA/0.jpg" alt="vid" border="0" width="355" height="200" /></a>
+
+
+Drive:
+
 
 <a href="https://drive.google.com/file/d/1uzy0w8jMStGZ-3xjisXb59fOfpzfheio/view?usp=sharing"><img src="https://i.ibb.co/82jQpBK/vid.png" alt="vid" border="0" width="355" height="200" /></a>
+
 
