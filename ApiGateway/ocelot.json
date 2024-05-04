@@ -3,7 +3,7 @@
     //Admin
     {
       "DownstreamPathTemplate": "/api/Admin/AddTuition",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "midtermapi",
@@ -19,7 +19,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/Admin/UnpaidTuitionStatus/{term}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "midtermapi",
@@ -37,7 +37,7 @@
     //Banking
     {
       "DownstreamPathTemplate": "/api/Banking/BankQueryTuition/{studentNo}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "midtermapi",
@@ -53,7 +53,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/Banking/AddBalance",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "midtermapi",
@@ -65,7 +65,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/Banking/PayTuition",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "midtermapi",
@@ -79,7 +79,7 @@
     //Mobile
     {
       "DownstreamPathTemplate": "/api/Mobile/MobileQueryTuition/{studentNo}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "midtermapi",
@@ -92,7 +92,7 @@
     //Login
     {
       "DownstreamPathTemplate": "/api/Login/Login",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "midtermapi",
