@@ -84,8 +84,8 @@ namespace MidtermApi.Controllers
 
             return Ok("Payment request sent");
         }
-        [HttpPost("ConsumeMessage")]
-        public  ActionResult ConsumeMessage()
+        [HttpPost("ConsumePaymentMessage")]
+        public  ActionResult ConsumePaymentMessage()
         {
             string paymentDetails = "";
 
