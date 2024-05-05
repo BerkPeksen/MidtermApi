@@ -84,49 +84,38 @@ namespace MidtermApi.Controllers
 
             return Ok("Payment request sent");
         }
+
+       
         [HttpPost("ConsumePaymentMessage")]
-        public  ActionResult<TuitionResponse> ConsumePaymentMessage()
+        public ActionResult ConsumePaymentMessage()
         {
             string paymentDetails = "";
 
-            // Create a connection to RabbitMQ
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                // Declare the queue
-                channel.QueueDeclare(queue: "payment_queue",
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
-
-                // Create a consumer
-                var consumer = new EventingBasicConsumer(channel);
-                consumer.Received += (model, ea) =>
+                // Get the message at the start of the queue
+                var result = channel.BasicGet("payment_queue", autoAck: false);
+                if (result != null)
                 {
                     // Get the payment details from the message
-                    var body = ea.Body.ToArray();
+                    var body = result.Body.ToArray();
                     paymentDetails = Encoding.UTF8.GetString(body);
 
                     // Process the payment
                     Console.WriteLine($"Processing payment for: {paymentDetails}");
 
                     // Acknowledge the message
-                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-                };
-
-                // Start consuming messages
-                channel.BasicConsume(queue: "payment_queue",
-                                     autoAck: false,
-                                     consumer: consumer);
-                while (string.IsNullOrEmpty(paymentDetails))
-                {
-                    Thread.Sleep(100); // Sleep for a short interval to avoid busy-waiting
+                    channel.BasicAck(deliveryTag: result.DeliveryTag, multiple: false);
                 }
-
-
+                else
+                {
+                    // No message in the queue
+                    return NotFound("No payment message in the queue");
+                }
             }
+
             var details = paymentDetails.Split(',');
             string studentNo = details[0];
             string term = details[1];
@@ -165,6 +154,6 @@ namespace MidtermApi.Controllers
             }
         }
 
-    
+
     }
 }
