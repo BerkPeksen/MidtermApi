@@ -17,16 +17,16 @@
 
 - Docker Configuration: Docker configuration for the API Gateway encountered issues during deployment. Misconfigurations in the docker-compose.yml file led to connectivity problems between the API Gateway and other microservices.
 
-<!-- ## Video
+## Video
 Youtube:
 
 
-<a href="https://youtu.be/PXFdO77KNPA"><img src="https://img.youtube.com/vi/PXFdO77KNPA/0.jpg" alt="vid" border="0" width="355" height="200" /></a>
+<a href="https://www.youtube.com/watch?v=08Uyy9V3qXU"><img src="https://img.youtube.com/vi/08Uyy9V3qXU/0.jpg" alt="vid" border="0" width="355" height="200" /></a>
 
 
 Drive:
 
 
-<a href="https://drive.google.com/file/d/1uzy0w8jMStGZ-3xjisXb59fOfpzfheio/view?usp=sharing"><img src="https://i.ibb.co/82jQpBK/vid.png" alt="vid" border="0" width="355" height="200" /></a> -->
+<a href="https://drive.google.com/file/d/1mynvLm74vLQi2rvZy-6aaqm8dus-dqUl/view?usp=sharing"><img src="https://i.ibb.co/82jQpBK/vid.png" alt="vid" border="0" width="355" height="200" /></a>
 
 
